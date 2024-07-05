@@ -121,6 +121,9 @@ class Cli extends \Magento\Backend\App\Action
             exec($c = 'cd ' . $this->dir->getRoot() . ' && ' . $command . ' &> ' . $logFile, $a, $b);
             $message = file_get_contents($logFile);
             if (!$message) {
+                $message = implode('</br>', $a);
+            }
+            if (!$message) {
                 $message = __('Command not found or error occurred.') . PHP_EOL;
             }
             unlink($logFile);
